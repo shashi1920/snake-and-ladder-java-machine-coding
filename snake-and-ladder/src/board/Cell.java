@@ -1,6 +1,7 @@
 package board;
 
-import item.Item;
+
+import entities.Item;
 
 import java.util.Objects;
 
@@ -24,5 +25,21 @@ public class Cell {
 
     public Cell(int value) {
         this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

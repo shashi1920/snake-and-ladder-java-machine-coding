@@ -22,39 +22,36 @@ public class GameRunner {
         for (int i = 0; i < n; i++) {
             int startPos = scanner.nextInt();
             int endPos = scanner.nextInt();
-            if(name.equals("snake")){
+            if (name.equals("snake")) {
                 items.add(new Snake(startPos, endPos));
             }
-            if(name.equals("ladder")){
+            if (name.equals("ladder")) {
                 items.add(new Ladder(startPos, endPos));
             }
         }
         return items;
     }
 
-    private static List<Player> inputPlayers(){
+    private static List<Player> inputPlayers() {
         List<Player> players = new ArrayList<>();
         System.out.println(String.format("Enter number of players"));
         int n = scanner.nextInt();
-        for (int i=0; i<n; i++){
-            System.out.println(String.format("Enter %s player name:", i+1));
+        for (int i = 0; i < n; i++) {
+            System.out.println(String.format("Enter %s player name:", i + 1));
             String playerName = scanner.nextLine();
             players.add(new Player(playerName));
         }
 
         return players;
     }
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         List<Item> items = inputItem("snake");
         items.addAll(inputItem("ladder"));
         List<Player> players = inputPlayers();
         Game game = new Game(players, items);
-        while (!game.isOver()){
-
+        while (!game.isOver()) {
         }
-
-
-
     }
 
 

@@ -11,8 +11,17 @@ public class Player {
         this.playerName = playerName;
         this.dice = dice;
     }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
     public Player(String playerName){
         this.playerName = playerName;
+    }
+
+    public void setDice(Dice dice) {
+        this.dice = dice;
     }
 
     int getNextRoll() {
