@@ -1,4 +1,4 @@
-package board;
+package entities;
 
 import java.util.Random;
 
@@ -8,7 +8,7 @@ public class Dice {
     int high;
     Dice dice = null;
 
-    Dice() {
+    public Dice() {
         this.low = 1;
         this.high = 6;
     }

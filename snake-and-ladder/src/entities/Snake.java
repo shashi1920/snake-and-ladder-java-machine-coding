@@ -1,12 +1,12 @@
-package board;
+package entities;
 
-public class Ladder implements Item{
+public class Snake implements Item {
 
     private int startPos;
     private int endPos;
 
-    public Ladder(int startPos, int endPos) {
-        if(startPos > endPos){
+    public Snake(int startPos, int endPos) {
+        if(startPos < endPos){
             throw new IllegalArgumentException();
         }
         this.startPos = startPos;
@@ -15,7 +15,7 @@ public class Ladder implements Item{
 
     @Override
     public String getName() {
-        return "Ladder";
+        return "Snake";
     }
 
     @Override

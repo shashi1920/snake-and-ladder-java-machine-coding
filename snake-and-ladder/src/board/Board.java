@@ -1,12 +1,15 @@
 package board;
 
+
+import entities.Item;
+
 public class Board {
 
     Cell[][] cells;
     int maxRow;
     int maxCol;
 
-    Board() {
+    public Board() {
         cells = new Cell[10][10];
         maxRow = 10;
         maxCol = 10;

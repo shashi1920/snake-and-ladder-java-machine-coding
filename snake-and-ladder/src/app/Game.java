@@ -1,4 +1,10 @@
-package board;
+package app;
+
+import board.*;
+import entities.Dice;
+import entities.Item;
+import item.Dice;
+import item.Item;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +16,7 @@ public class Game {
     Map<Player, Cell> playerPosition;
     Dice dice = new Dice();
 
-    Game(List<Player> players, Map<Integer, Item> itemMap) {
+    Game(List<Player> players, List<Item> items) {
         if (players == null || players.isEmpty()) {
             //throw ex
         }
@@ -20,9 +26,9 @@ public class Game {
         }
         board = new Board();
 
-        if (itemMap != null) {
-            for (Map.Entry<Integer, Item> entry : itemMap.entrySet()) {
-                board.addItem(entry.getKey(), entry.getValue());
+        if (items != null) {
+            for (Item item : items) {
+                board.addItem(item.getStartPos(), item);
             }
         }
     }
