@@ -42,4 +42,11 @@ public class Cell {
     public void setItem(Item item) {
         this.item = item;
     }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "value=" + value +
+                '}';
+    }
 }

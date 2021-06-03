@@ -6,13 +6,15 @@ import board.Player;
 import entities.Dice;
 import entities.Item;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Game {
 
-    private final int MAX_ROW = 10;
-    private final int MAX_COL = 10;
+    private final int maxRow = 10;
+    private final int maxCol = 10;
     Board board;
     List<Player> players;
     int totalTurn = 0;
@@ -20,17 +22,15 @@ public class Game {
     Dice dice = new Dice();
 
     Game(List<Player> players, List<Item> items) {
+        playerPosition = new HashMap<>();
         if (players == null || players.isEmpty()) {
             //throw ex
-        }
-        for (Player player : players) {
-            player.setDice(dice);
         }
         this.players = players;
         for (Player player : this.players) {
             playerPosition.put(player, null);
         }
-        board = new Board(MAX_ROW, MAX_COL);
+        board = new Board(maxRow, maxCol);
 
         if (items != null) {
             for (Item item : items) {
@@ -40,33 +40,33 @@ public class Game {
     }
 
     public void nextTurn() {
-        if(!isOver()){
+        if (!isOver()) {
             Player player = players.get(totalTurn % players.size());
             Cell currentCell = playerPosition.get(player);
-            if(currentCell == null){
-                board.get
-
+            int roll = dice.roll();
+            System.out.println(player.getName() + " rolled " + roll);
+            Cell nextCell = board.getCell(currentCell == null ? roll : currentCell.getValue() + roll);
+            while (nextCell.getItem() != null) {
+                System.out.println("encountered " + nextCell.getItem().asString());
+                nextCell = board.getCell(nextCell.getItem().getNextPos(nextCell.getValue()));
             }
+            System.out.println(String.format("%s moved from %s to %s", player.getName(), currentCell != null ? currentCell.getValue() : 0, nextCell.getValue()));
+            playerPosition.put(player,nextCell);
+            totalTurn += 1;
 
-
-
-
-            totalTurn+=1;
-
-        }
-        else {
+        } else {
             System.out.println("Game is already Over");
         }
 
     }
 
     public boolean isOver() {
-        return playerPosition.values().stream().filter(x -> x.getValue() == MAX_ROW * MAX_COL).findFirst().isPresent();
+        return playerPosition.values().stream().filter(Objects::nonNull).anyMatch(x -> x.getValue() == maxRow * maxCol);
     }
 
     public Player getWinner() {
         return playerPosition.entrySet()
-                .stream().filter(x -> x.getValue().getValue() == MAX_ROW * MAX_COL)
+                .stream().filter(x -> x != null && x.getValue().getValue() == maxRow * maxCol)
                 .map(x -> x.getKey()).findFirst().orElse(null);
     }
 

@@ -17,11 +17,12 @@ public class GameRunner {
     private static List<Item> inputItem(String name) {
         List<Item> items = new ArrayList<>();
         System.out.println(String.format("Enter number of %s", name));
-        int n = scanner.nextInt();
+        int n = Integer.parseInt(scanner.nextLine());
         System.out.println(String.format("Enter %s %s startPos<space>endPos", n, name));
         for (int i = 0; i < n; i++) {
-            int startPos = scanner.nextInt();
-            int endPos = scanner.nextInt();
+            String line = scanner.nextLine();
+            int startPos = Integer.parseInt(line.split(" ")[0]);
+            int endPos = Integer.parseInt(line.split(" ")[1]);
             if (name.equals("snake")) {
                 items.add(new Snake(startPos, endPos));
             }
@@ -35,7 +36,7 @@ public class GameRunner {
     private static List<Player> inputPlayers() {
         List<Player> players = new ArrayList<>();
         System.out.println(String.format("Enter number of players"));
-        int n = scanner.nextInt();
+        int n = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < n; i++) {
             System.out.println(String.format("Enter %s player name:", i + 1));
             String playerName = scanner.nextLine();
@@ -51,7 +52,9 @@ public class GameRunner {
         List<Player> players = inputPlayers();
         Game game = new Game(players, items);
         while (!game.isOver()) {
+            game.nextTurn();
         }
+        System.out.println("Winner is :" +game.getWinner().getName());
     }
 
 

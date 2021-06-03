@@ -3,6 +3,8 @@ package board;
 
 import entities.Item;
 
+import java.util.Arrays;
+
 public class Board {
 
     Cell[][] cells;
@@ -14,26 +16,28 @@ public class Board {
     }
 
     public Board(int row, int col) {
-        cells = new Cell[10][10];
-        maxRow = row;
-        maxCol = col;
+        this.maxRow = row;
+        this.maxCol = col;
+        cells = new Cell[this.maxRow][this.maxCol];
         for (int i = 0; i < maxRow; i++) {
             for (int j = 0; j < maxCol; j++) {
-                cells[i][j] = new Cell(i * maxRow + j + 1);
+                cells[i][j] = new Cell((i*maxCol)+j+1);
             }
         }
     }
 
     public boolean addItem(int cellValue, Item item) {
+        getCell(cellValue).setItem(item);
         return true;
     }
 
-    public Cell getCell(int value){
-        if(value > cells.length){
-            // throw exception
+    public Cell getCell(int value) {
+        if (value >= maxRow*maxCol) {
+            return cells[maxRow - 1][maxCol - 1];
         }
-
-
+        int row = (value - 1) / maxRow;
+        int col = (value - 1) % maxCol;
+        return cells[row][col];
     }
 
 }

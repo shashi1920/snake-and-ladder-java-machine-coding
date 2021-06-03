@@ -10,5 +10,8 @@ public interface Item {
     default int getNextPos(int currPos) {
         return currPos == getStartPos() ? getEndPos() : currPos;
     }
+    default String asString(){
+        return getName() + " [" + getStartPos() + "," + getEndPos()+"]";
+    }
 
 }

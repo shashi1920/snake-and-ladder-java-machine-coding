@@ -1,6 +1,5 @@
 package entities;
 
-import item.Item;
 
 public class Ladder implements Item {
 
