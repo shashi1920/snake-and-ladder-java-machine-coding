@@ -54,7 +54,7 @@ public class GameRunner {
         while (!game.isOver()) {
             game.nextTurn();
         }
-        System.out.println("Winner is :" +game.getWinner().getName());
+        System.out.println("Winner is : " +game.getWinner().getName());
     }
 
 
